@@ -1,0 +1,280 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0B132B;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 430px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+header {
+  text-align: center;
+  margin-top: 5px;
+}
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  color: #C5A880;
+}
+
+#fecha-actual {
+  font-size: 0.8rem;
+  color: #8D99AE;
+  margin-top: 2px;
+}
+
+/* Navegación por Pestañas */
+.tabs {
+  display: flex;
+  background: #1C2541;
+  border-radius: 10px;
+  padding: 4px;
+  border: 1px solid #3A506B;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+  color: #8D99AE;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #C5A880;
+  color: #0B132B;
+}
+
+.tab-content {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tab-content.active {
+  display: flex;
+}
+
+/* Tarjetas */
+.card {
+  background: #1C2541;
+  border: 1px solid #3A506B;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.card-header-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+h2, h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: #C5A880;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.total-monto {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-align: center;
+  margin: 10px 0;
+  transition: filter 0.3s;
+}
+
+/* Modo Privacidad (Difuminado) */
+.privacy-blur.blurred {
+  filter: blur(8px);
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* Barra de Presupuesto */
+.budget-container {
+  margin-top: 10px;
+}
+
+.budget-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #8D99AE;
+  margin-bottom: 4px;
+}
+
+.budget-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #0B132B;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.budget-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #C5A880;
+  transition: width 0.4s ease;
+}
+
+/* Formularios e Inputs */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, select, .btn-gold, .btn-small {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #3A506B;
+  background-color: #0B132B;
+  color: #FFF;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-gold {
+  background-color: #C5A880;
+  color: #0B132B;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  background: #3A506B;
+  border: none;
+  cursor: pointer;
+}
+
+/* Listas */
+.history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.history-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #0B132B;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* Gráfico */
+.chart-wrapper {
+  position: relative;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+/* Calendario */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  color: #C5A880;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.calendar-grid-header, .calendar-grid-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 4px;
+}
+
+.calendar-grid-header {
+  font-size: 0.7rem;
+  color: #8D99AE;
+  margin-bottom: 5px;
+}
+
+.calendar-grid-days div {
+  padding: 8px 0;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  background-color: #0B132B;
+}
+
+.calendar-grid-days .today {
+  border: 1px solid #C5A880;
+  color: #C5A880;
+  font-weight: bold;
+}
+
+/* Calculadora */
+.calc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.calc-form label {
+  font-size: 0.8rem;
+  color: #8D99AE;
+}
+
+.calc-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #3A506B;
+}
+
+.calc-result strong {
+  font-size: 1.3rem;
+  color: #C5A880;
+}
