@@ -4,9 +4,34 @@
   padding: 0;
 }
 
+/* Variables de Temas */
+body.theme-navy {
+  --bg-color: #0B132B;
+  --card-bg: #1C2541;
+  --border-color: #3A506B;
+  --accent-color: #C5A880;
+  --text-color: #FFFFFF;
+}
+
+body.theme-emerald {
+  --bg-color: #022C22;
+  --card-bg: #064E3B;
+  --border-color: #047857;
+  --accent-color: #A7F3D0;
+  --text-color: #FFFFFF;
+}
+
+body.theme-dark {
+  --bg-color: #09090B;
+  --card-bg: #18181B;
+  --border-color: #27272A;
+  --accent-color: #F43F5E;
+  --text-color: #FFFFFF;
+}
+
 body {
-  background-color: #0B132B;
-  color: #FFFFFF;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
@@ -24,29 +49,26 @@ body {
 
 header {
   text-align: center;
-  margin-top: 5px;
 }
 
 h1 {
   font-family: 'Cinzel', serif;
   font-size: 1.3rem;
   letter-spacing: 2px;
-  color: #C5A880;
+  color: var(--accent-color);
 }
 
 #fecha-actual {
   font-size: 0.8rem;
   color: #8D99AE;
-  margin-top: 2px;
 }
 
-/* Navegación por Pestañas */
 .tabs {
   display: flex;
-  background: #1C2541;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 4px;
-  border: 1px solid #3A506B;
+  border: 1px solid var(--border-color);
 }
 
 .tab-btn {
@@ -57,14 +79,14 @@ h1 {
   color: #8D99AE;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   border-radius: 8px;
   cursor: pointer;
 }
 
 .tab-btn.active {
-  background: #C5A880;
-  color: #0B132B;
+  background: var(--accent-color);
+  color: var(--bg-color);
 }
 
 .tab-content {
@@ -77,10 +99,9 @@ h1 {
   display: flex;
 }
 
-/* Tarjetas */
 .card {
-  background: #1C2541;
-  border: 1px solid #3A506B;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -90,27 +111,22 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 h2, h3 {
   font-family: 'Cinzel', serif;
   font-size: 0.9rem;
-  color: #C5A880;
+  color: var(--accent-color);
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 .total-monto {
   font-size: 2.2rem;
   font-weight: 600;
-  color: #FFFFFF;
   text-align: center;
   margin: 10px 0;
-  transition: filter 0.3s;
 }
 
-/* Modo Privacidad (Difuminado) */
 .privacy-blur.blurred {
   filter: blur(8px);
 }
@@ -122,9 +138,17 @@ h2, h3 {
   cursor: pointer;
 }
 
-/* Barra de Presupuesto */
-.budget-container {
+.savings-container {
+  background-color: var(--bg-color);
+  padding: 10px;
+  border-radius: 8px;
   margin-top: 10px;
+}
+
+.savings-inputs {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
 }
 
 .budget-info {
@@ -138,7 +162,7 @@ h2, h3 {
 .budget-bar {
   width: 100%;
   height: 8px;
-  background-color: #0B132B;
+  background-color: var(--bg-color);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -146,11 +170,10 @@ h2, h3 {
 .budget-fill {
   height: 100%;
   width: 0%;
-  background-color: #C5A880;
+  background-color: var(--accent-color);
   transition: width 0.4s ease;
 }
 
-/* Formularios e Inputs */
 form {
   display: flex;
   flex-direction: column;
@@ -160,16 +183,16 @@ form {
 input, select, .btn-gold, .btn-small {
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #3A506B;
-  background-color: #0B132B;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
   color: #FFF;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-family: 'Montserrat', sans-serif;
 }
 
 .btn-gold {
-  background-color: #C5A880;
-  color: #0B132B;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -178,13 +201,12 @@ input, select, .btn-gold, .btn-small {
 .btn-small {
   padding: 4px 8px;
   font-size: 0.75rem;
-  background: #3A506B;
+  background: var(--border-color);
   border: none;
   cursor: pointer;
 }
 
-/* Listas */
-.history-list {
+.history-list, .checklist-list {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -193,20 +215,24 @@ input, select, .btn-gold, .btn-small {
   overflow-y: auto;
 }
 
-.history-list li {
+.history-list li, .checklist-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background-color: #0B132B;
+  background-color: var(--bg-color);
   border-radius: 6px;
   font-size: 0.85rem;
 }
 
-/* Gráfico */
+.checklist-list li.done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
 .chart-wrapper {
   position: relative;
-  max-width: 220px;
+  max-width: 200px;
   margin: 0 auto;
 }
 
@@ -221,7 +247,7 @@ input, select, .btn-gold, .btn-small {
 .calendar-header button {
   background: none;
   border: none;
-  color: #C5A880;
+  color: var(--accent-color);
   font-size: 1.2rem;
   cursor: pointer;
 }
@@ -243,13 +269,42 @@ input, select, .btn-gold, .btn-small {
   padding: 8px 0;
   font-size: 0.8rem;
   border-radius: 6px;
-  background-color: #0B132B;
+  background-color: var(--bg-color);
 }
 
 .calendar-grid-days .today {
-  border: 1px solid #C5A880;
-  color: #C5A880;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
   font-weight: bold;
+}
+
+/* Matriz Eisenhower */
+.eisenhower-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.eisen-quadrant {
+  background: var(--bg-color);
+  padding: 8px;
+  border-radius: 6px;
+  min-height: 90px;
+  font-size: 0.75rem;
+}
+
+.eisen-quadrant h4 {
+  font-size: 0.7rem;
+  margin-bottom: 5px;
+  color: var(--accent-color);
+}
+
+.eisen-quadrant ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 /* Calculadora */
@@ -271,10 +326,10 @@ input, select, .btn-gold, .btn-small {
   align-items: center;
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid #3A506B;
+  border-top: 1px solid var(--border-color);
 }
 
 .calc-result strong {
   font-size: 1.3rem;
-  color: #C5A880;
+  color: var(--accent-color);
 }
