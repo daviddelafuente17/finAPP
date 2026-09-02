@@ -4,14 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Control Financiero & Agenda Ejecutiva</title>
-  <link rel="apple-touch-icon" href="icono.png">
   <link rel="stylesheet" href="style.css">
-  <!-- Tipografía ejecutiva -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-  <!-- Librería de Gráficos Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body class="theme-navy">
   <div class="app-container">
     
     <header>
@@ -19,18 +16,18 @@
       <p id="fecha-actual"></p>
     </header>
 
-    <!-- Pestañas de Navegación -->
+    <!-- Navegación por Pestañas -->
     <nav class="tabs">
       <button class="tab-btn active" onclick="switchTab('finanzas')">Finanzas</button>
-
       <button class="tab-btn" onclick="switchTab('agenda')">Agenda</button>
-      <button class="tab-btn" onclick="switchTab('herramientas')">Herramientas</button>
+      <button class="tab-btn" onclick="switchTab('fitness')">Gym & Dieta</button>
+      <button class="tab-btn" onclick="switchTab('herramientas')">Extras</button>
     </nav>
 
-    <!-- SECCIÓN 1: FINANZAS -->
+    <!-- SECCIÓN 1: FINANZAS Y AHORRO -->
     <main id="sec-finanzas" class="tab-content active">
       
-      <!-- Dashboard Balance -->
+      <!-- Balance & Ahorro Mensual -->
       <section class="card">
         <div class="card-header-split">
           <h2>Balance General</h2>
@@ -38,8 +35,20 @@
         </div>
         <div class="total-monto privacy-blur" id="total-gastado">0,00 €</div>
         
-        <!-- Barra de Presupuesto -->
-        <div class="budget-container">
+        <!-- Módulo de Capital Ahorrado al Mes -->
+        <div class="savings-container">
+          <div class="card-header-split" style="margin-bottom: 5px;">
+            <span style="font-size:0.8rem; color:#8D99AE;">Capital Ahorrado este Mes</span>
+            <strong id="ahorro-monto" class="privacy-blur" style="color:#C5A880;">0,00 €</strong>
+          </div>
+          <div class="savings-inputs">
+            <input type="number" id="input-ingreso" placeholder="Ingreso mensual (€)" step="0.01">
+            <button onclick="guardarIngreso()" class="btn-gold" style="padding: 6px 12px; font-size: 0.8rem;">Guardar</button>
+          </div>
+        </div>
+
+        <!-- Presupuesto -->
+        <div class="budget-container" style="margin-top: 15px;">
           <div class="budget-info">
             <span>Presupuesto Mensual (1.500 €)</span>
             <span id="budget-percent">0%</span>
@@ -50,7 +59,7 @@
         </div>
       </section>
 
-      <!-- Gráfico de Distribución -->
+      <!-- Gráfico -->
       <section class="card">
         <h2>Distribución por Categoría</h2>
         <div class="chart-wrapper">
@@ -58,7 +67,7 @@
         </div>
       </section>
 
-      <!-- Formulario de Nuevo Gasto -->
+      <!-- Nuevo Gasto -->
       <section class="card">
         <h3>Nuevo Registro</h3>
         <form id="gasto-form">
@@ -86,7 +95,7 @@
 
     </main>
 
-    <!-- SECCIÓN 2: CALENDARIO Y AGENDA -->
+    <!-- SECCIÓN 2: AGENDA, MATRIZ EISENHOWER Y POMODORO -->
     <main id="sec-agenda" class="tab-content">
       
       <!-- Calendario -->
@@ -102,40 +111,120 @@
         <div id="calendar-days" class="calendar-grid-days"></div>
       </section>
 
-      <!-- Recordatorios -->
+      <!-- Recordatorios + Exportación a iCal -->
       <section class="card">
         <h3>Recordatorios & Citas</h3>
         <form id="reminder-form">
           <input type="text" id="rem-text" placeholder="Ej. Reunión de estrategia..." required>
-          <input type="date" id="rem-date" required>
+          <input type="datetime-local" id="rem-date" required>
           <button type="submit" class="btn-gold">Añadir Recordatorio</button>
         </form>
         <ul id="lista-recordatorios" class="history-list" style="margin-top: 15px;"></ul>
       </section>
 
+      <!-- Matriz de Eisenhower -->
+      <section class="card">
+        <h2>Matriz de Eisenhower</h2>
+        <div class="eisenhower-grid">
+          <div class="eisen-quadrant q-urgent-important">
+            <h4>Hazlo ya (Urgente/Imp)</h4>
+            <ul id="list-q1"></ul>
+          </div>
+          <div class="eisen-quadrant q-noturgent-important">
+            <h4>Planifica (No Urg/Imp)</h4>
+            <ul id="list-q2"></ul>
+          </div>
+          <div class="eisen-quadrant q-urgent-notimportant">
+            <h4>Delega (Urg/No Imp)</h4>
+            <ul id="list-q3"></ul>
+          </div>
+          <div class="eisen-quadrant q-noturgent-notimportant">
+            <h4>Elimina (No Urg/No Imp)</h4>
+            <ul id="list-q4"></ul>
+          </div>
+        </div>
+        <form id="eisen-form" style="margin-top: 10px;">
+          <input type="text" id="eisen-text" placeholder="Nueva tarea..." required>
+          <select id="eisen-type" required>
+            <option value="q1">Urgente e Importante</option>
+            <option value="q2">No Urgente pero Importante</option>
+            <option value="q3">Urgente pero No Importante</option>
+            <option value="q4">Ni Urgente ni Importante</option>
+          </select>
+          <button type="submit" class="btn-gold">Agregar a Matriz</button>
+        </form>
+      </section>
+
+      <!-- Temporizador Pomodoro -->
+      <section class="card" style="text-align: center;">
+        <h2>Temporizador Enfoque (Pomodoro)</h2>
+        <div id="pomo-timer" style="font-size: 2.5rem; font-weight: bold; margin: 15px 0; color: #C5A880;">25:00</div>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button onclick="startPomodoro()" class="btn-gold" style="flex:1;">Iniciar</button>
+          <button onclick="pausePomodoro()" class="btn-small" style="flex:1;">Pausar</button>
+          <button onclick="resetPomodoro()" class="btn-small" style="flex:1;">Reset</button>
+        </div>
+      </section>
+
     </main>
 
-    <!-- SECCIÓN 3: HERRAMIENTAS EXTRAS -->
+    <!-- SECCIÓN 3: GIMNASIO & CALORÍAS -->
+    <main id="sec-fitness" class="tab-content">
+      
+      <!-- Rutina de Gimnasio -->
+      <section class="card">
+        <h3>Checklist Rutina de Gimnasio</h3>
+        <form id="gym-form">
+          <input type="text" id="gym-exercise" placeholder="Ej. Press Banca 4x10" required>
+          <button type="submit" class="btn-gold">Añadir Ejercicio</button>
+        </form>
+        <ul id="gym-list" class="checklist-list" style="margin-top: 15px;"></ul>
+      </section>
+
+      <!-- Contador de Calorías -->
+      <section class="card">
+        <div class="card-header-split">
+          <h3>Contador de Calorías</h3>
+          <strong id="total-cal" style="color:#C5A880;">0 / 2500 kcal</strong>
+        </div>
+        <form id="cal-form">
+          <input type="text" id="food-name" placeholder="Comida (Ej. Pechuga de pollo)" required>
+          <input type="number" id="food-cal" placeholder="Calorías (kcal)" required>
+          <button type="submit" class="btn-gold">Registrar Comida</button>
+        </form>
+        <ul id="cal-list" class="history-list" style="margin-top: 15px;"></ul>
+      </section>
+
+    </main>
+
+    <!-- SECCIÓN 4: EXTRAS & TEMAS -->
     <main id="sec-herramientas" class="tab-content">
       
-      <!-- Calculadora de Propinas / División de Cuentas -->
+      <!-- Selector de Temas -->
+      <section class="card">
+        <h2>Personalización de Tema</h2>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+          <button onclick="setTheme('theme-navy')" class="btn-small" style="background:#0B132B; color:#C5A880; flex:1;">Azul Marino</button>
+          <button onclick="setTheme('theme-emerald')" class="btn-small" style="background:#064E3B; color:#A7F3D0; flex:1;">Esmeralda</button>
+          <button onclick="setTheme('theme-dark')" class="btn-small" style="background:#18181B; color:#F43F5E; flex:1;">Oculto / Dark</button>
+        </div>
+      </section>
+
+      <!-- Calculadora de Propinas -->
       <section class="card">
         <h2>Dividir Cuenta & Propinas</h2>
         <div class="calc-form">
           <label>Total de la cuenta (€)</label>
           <input type="number" id="calc-total" placeholder="0.00" step="0.01">
-          
           <label>Personas</label>
           <input type="number" id="calc-people" value="1" min="1">
-          
           <label>Propina (%)</label>
           <select id="calc-tip">
             <option value="0">0%</option>
             <option value="5">5%</option>
-            <option value="10" selected>10% (Estándar)</option>
+            <option value="10" selected>10%</option>
             <option value="15">15%</option>
           </select>
-
           <div class="calc-result">
             <span>Pago por persona:</span>
             <strong id="calc-per-person">0.00 €</strong>
@@ -150,4 +239,3 @@
   <script src="app.js"></script>
 </body>
 </html>
-<link rel="apple-touch-icon" href="icono.png">
